@@ -1,22 +1,28 @@
+/** Comp30024 - Project Part A
+ *  Group members:
+ *		Takemitsu Yamanaka - 757038 - tyamanaka@student.unimelb.edu.au
+ * 		Huang Qian - 774496 - 262483611@qq.com
+ */
+
 /** The Game Board
  */
 public class Board {
 	private int boardSize;
-	private GamePiece[][] boardState;
+	private Cell[][] boardState;
 	
-	/** initialting a new Board */
+	/** Initializing a new Board */
 	public Board(int size){
 		this.boardSize = size;
-		this.boardState = new GamePiece[boardSize][boardSize];
+		this.boardState = new Cell[boardSize][boardSize];
 	}
 	
 	/** Marks the board with a given content
-	 * @param content The charater value of the piece
+	 * @param content The character value of the piece
 	 * @param x The x coordinate of the given content
 	 * @param y The y coordinate of the given content
 	 */
 	public void markBoard(char content, int x, int y){
-		GamePiece piece = null;
+		Cell piece = null;
 		
 		/* Only four types of game pieces in the game */
 		switch(content){
@@ -27,10 +33,10 @@ public class Board {
 				piece = new Vertical();
 				break;
 			case '+':
-				piece = new Cell(false);
+				piece = new Path();
 				break;
 			case 'B':
-				piece = new Cell(true);
+				piece = new Path(true);
 				break;
 			default:
 				break;
@@ -51,7 +57,7 @@ public class Board {
 	 * @param x The x coordinate
 	 * @param y The y coordinate
 	 */
-	public GamePiece getPiece(int x, int y){
+	public Cell getPiece(int x, int y){
 		return boardState[x][y];
 	}
 	

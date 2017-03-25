@@ -3,8 +3,9 @@ import java.util.Scanner;
 /** Comp30024 - Project Part A
  *  Group members:
  *		Takemitsu Yamanaka - 757038 - tyamanaka@student.unimelb.edu.au
- * 		add yours fam
+ * 		Huang Qian - 774496 - 262483611@qq.com
  */
+
 /** Main class which include the main method and the calculations of the legal moves
  */
 
@@ -60,26 +61,28 @@ public class LegalMoveProgram {
 	/** Calculates the legal moves player H and V can make 
 	 */
 	public void calculateMoves(){
-		GamePiece piece = null;
+		Cell item = null;
 		int size = boardConfiguration.getBoardSize();
 		int temp = 0;
 		
 		for(int i = 0; i < size; i++){	
 			for(int j = 0; j < size; j++){
-				piece = boardConfiguration.getPiece(i,j);
+				item = boardConfiguration.getPiece(i,j);
 				
 				// if piece was a path/blocked path (cell) 
 				// or blank piece then skip to next cell 
-				if(piece instanceof Cell || piece == null)
+				if(item instanceof Path || item == null)
 					continue;
 				
-				/* Calculate the amount of legal moves the selected piece can make */
-				temp = calculateLegalMoves(piece, i, j);
+				/* Calculate the amount of legal moves the selected piece can 
+				 * make. The argument item is also downcasted to GamePiece
+				 */
+				temp = calculateLegalMoves((GamePiece)item, i, j);
 				
-				if(piece instanceof Vertical)
+				if(item instanceof Vertical)
 					this.numLegalVMoves += temp;
 				
-				if(piece instanceof Horizontal)
+				if(item instanceof Horizontal)
 					this.numLegalHMoves += temp;
 			}
 		}
@@ -93,19 +96,17 @@ public class LegalMoveProgram {
 	public int calculateLegalMoves(GamePiece piece, int x, int y){
 		int move = 0;
 		int tempX, tempY;
-		//Downcast from GamePiece to PlayerPiece
-		PlayerPiece playerPiece = (PlayerPiece) piece; 
-	
-		for(int i = 0; i < 3; i++){ // Need to change that number
+		
+		for(int i = 0; i < GamePiece.NUM_OF_POSSIBLE_MOVES; i++){
 			
-			tempX = playerPiece.getLegalMoveX(i) + x;
-			tempY = playerPiece.getLegalMoveY(i) + y;
+			tempX = piece.getLegalMoveX(i) + x;
+			tempY = piece.getLegalMoveY(i) + y;
 			
 			// if out of bound then illegal move
 			if(!boardConfiguration.outOfBond(tempX, tempY)){
-				GamePiece path = boardConfiguration.getPiece(tempX, tempY);
+				Cell path = boardConfiguration.getPiece(tempX, tempY);
 				// if it's a path and not a blocked cell, then legal move
-				if(path instanceof Cell && !((Cell) path).isBlocked()){
+				if(path instanceof Path && !((Path) path).isBlocked()){
 					move ++;
 				}
 			}

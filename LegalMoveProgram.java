@@ -1,3 +1,4 @@
+package tyamanaka.slider;
 import java.util.Scanner;
 
 /** Comp30024 - Project Part A

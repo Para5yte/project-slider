@@ -7,14 +7,15 @@ import java.util.Scanner;
  * 		Huang Qian - 774496 - 262483611@qq.com
  */
 
-/** Main class which include the main method and the calculations of the legal moves
+/** Main class which include the main method and the calculations of the 
+	legal moves
  */
 
 public class LegalMoveProgram {
 	
 	private Scanner reader;
 	
-	/** Board state thats given to calculate the legal moves for player H and V */
+	/** Board state thats given to calculate the legal moves */
 	private Board boardConfiguration;
 	
 	/** Number of legal moves for Horizontal pieces; */
@@ -27,7 +28,8 @@ public class LegalMoveProgram {
 		reader = new Scanner(System.in); // Reading from System.in
 	}
 
-	/** Main method which starts the program and prints the output */
+	/** Main method which starts the program and prints the output 
+	 */
 	public static void main(String[] args) {
 		LegalMoveProgram program = new LegalMoveProgram();
 		program.read();
@@ -42,7 +44,7 @@ public class LegalMoveProgram {
 		String inputLine;
 		char piece;
 		
-		/* reads the initial board size and initializes the board with that size*/
+		/* reads the board size and initializes the board with that size*/
 		int boardSize = reader.nextInt();
 		inputLine = reader.nextLine(); // to read the "\n" after first number
 		boardConfiguration = new Board(boardSize);
@@ -91,7 +93,8 @@ public class LegalMoveProgram {
 		}
 	}
 	
-	/** Returns and calculates the amount of legal moves the inputed piece can make
+	/** Returns and calculates the amount of legal moves the inputed piece 
+	 *  can make
 	 * @param piece A player's game piece which is evaluated
 	 * @param x The x coordinate of the piece
 	 * @param y The y coordinate of the piece

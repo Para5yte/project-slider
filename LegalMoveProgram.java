@@ -44,7 +44,7 @@ public class LegalMoveProgram {
 		
 		/* reads the initial board size and initializes the board with that size*/
 		int boardSize = reader.nextInt();
-		inputLine = reader.nextLine();
+		inputLine = reader.nextLine(); // to read the "\n" after first number
 		boardConfiguration = new Board(boardSize);
 		
 		/* reads the board state given by System.in */

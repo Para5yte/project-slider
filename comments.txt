@@ -1,0 +1,66 @@
+Part A Analysis
+Huang Qian - 774496
+Take Yamanaka - 757038
+
+Our program consists the following main step:
+1. new legal move program object is initialted
+2. program uses its read function to initalize/create the board and reads the inputs
+	
+	function read() returns void
+		create empty String inputLine
+		create empty char piece
+
+		boardSize = nextInt()
+		create new Board with the boardSize
+
+		for each incremented value of i under boardSize
+			inputLine = nextLine()
+			for each incremented value of j under boardSize
+				let piece be the character at j * 2 of inputLine
+				mark the board of that piece
+
+3. program uses its calculateMoves function
+
+	function calclateMoves() returns void
+		create empty Cell item
+		size = boardSize
+		temp = 0
+
+		for each incremented value of i under size
+			for each incremented value of j under size
+				item = getPiece(i,j) on the board
+				if item is instance of class Path or item is null
+					continue
+
+				temp = calculateLegalMoves(item, i, j)
+				if item instance of class Vertical
+					numLegalVMoves += temp
+				if item instance of class Horizontal
+					numLegalHMoves += temp
+
+	function calculateLegalMoves(piece, x, y) returns move
+		move = 0
+		create empty tempX and tempY
+
+		for each incremented value of i under NUM_POSSIBLE_MOVES (3)
+			//getLegalMove returns the directions which the piece can move
+			tempX = piece.getLegalMoveX(i) + x
+			tempY = piece.getLegalMoveY(i) + y
+
+			if tempX and tempY not out of bound
+				path = getPiece(tempX, tempY) on the board
+				if path is instance of class Path and path is not blocked
+					move ++
+
+		return move
+
+4. program prints the results of numLegalHMoves/numLegalVMoves
+
+Time complexity.
+Let n be the board size.
+For step 1. We need a double for loop to read data. Thus, it is O(n^2).
+
+For step 2. We fill in the data right after we read it (in the same loop).  So, it is also O(n^2).
+For step 3. Iterate the whole board also needs O(n^2)
+For step 4. Let the number of V+H piece be n. Since there are maximum 3 possible moves for each piece, it will take up to 3n time. So, it is O(n).
+Add step 1 to 4 together we get O(n^2).

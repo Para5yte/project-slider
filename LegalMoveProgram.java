@@ -53,8 +53,9 @@ public class LegalMoveProgram {
 			inputLine = reader.nextLine();
 	
 			for(int j = 0; j < boardSize; j++){	
-				piece = inputLine.charAt(j * 2); // times by 2 as there is a space 
-								//between each piece of the input
+				piece = inputLine.charAt(j * 2); 
+				/*times by 2 as there is a space between each 
+				piece of the input*/
 				boardConfiguration.markBoard(piece, i, j);
 			}
 		}

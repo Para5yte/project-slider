@@ -59,7 +59,6 @@ Our program consists the following main step:
 Time complexity.
 Let n be the board size.
 For step 1. We need a double for loop to read data. Thus, it is O(n^2).
-
 For step 2. We fill in the data right after we read it (in the same loop).  So, it is also O(n^2).
 For step 3. Iterate the whole board also needs O(n^2)
 For step 4. Let the number of V+H piece be n. Since there are maximum 3 possible moves for each piece, it will take up to 3n time. So, it is O(n).

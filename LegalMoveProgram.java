@@ -1,4 +1,3 @@
-package tyamanaka.slider;
 import java.util.Scanner;
 
 /** Comp30024 - Project Part A
@@ -70,9 +69,9 @@ public class LegalMoveProgram {
 		int size = boardConfiguration.getBoardSize();
 		int temp = 0;
 		
-		for(int i = 0; i < size; i++){	
-			for(int j = 0; j < size; j++){
-				item = boardConfiguration.getPiece(i,j);
+		for(int y = 0; y < size; y++){	
+			for(int x =  0; x < size; x++){
+				item = boardConfiguration.getPiece(y, x);
 				
 				// if piece was a path/blocked path (cell) 
 				// or blank piece then skip to next cell 
@@ -82,7 +81,7 @@ public class LegalMoveProgram {
 				/* Calculate the amount of legal moves the selected piece can 
 				 * make. The argument item is also downcasted to GamePiece
 				 */
-				temp = calculateLegalMoves((GamePiece)item, i, j);
+				temp = calculateLegalMoves((GamePiece)item, y, x);
 				
 				if(item instanceof Vertical)
 					this.numLegalVMoves += temp;
@@ -99,18 +98,23 @@ public class LegalMoveProgram {
 	 * @param x The x coordinate of the piece
 	 * @param y The y coordinate of the piece
 	 */
-	public int calculateLegalMoves(GamePiece piece, int x, int y){
+	public int calculateLegalMoves(GamePiece piece, int y, int x){
 		int move = 0;
-		int tempX, tempY;
+		int tempY, tempX;
 		
 		for(int i = 0; i < GamePiece.NUM_OF_POSSIBLE_MOVES; i++){
 			
-			tempX = piece.getLegalMoveX(i) + x;
 			tempY = piece.getLegalMoveY(i) + y;
-			
+			tempX = piece.getLegalMoveX(i) + x;
+
 			// if out of bound then illegal move
-			if(!boardConfiguration.outOfBond(tempX, tempY)){
-				Cell path = boardConfiguration.getPiece(tempX, tempY);
+			if(!boardConfiguration.outOfBond(tempY, tempX, piece)){
+				Cell path = boardConfiguration.getPiece(tempY, tempX);
+				// if the path is a out of board piece, then it can move off
+				// the board to score a point thus legal move
+				if(path == null){
+					move ++;
+				}
 				// if it's a path and not a blocked cell, then legal move
 				if(path instanceof Path && !((Path) path).isBlocked()){
 					move ++;

@@ -1,5 +1,3 @@
-package tyamanaka.slider;
-
 /** Comp30024 - Project Part A
  *  Group members:
  *		Takemitsu Yamanaka - 757038 - tyamanaka@student.unimelb.edu.au

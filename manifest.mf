@@ -1,1 +1,1 @@
-Main-Class: tyamanaka.slider.LegalMoveProgram
+Main-Class: LegalMoveProgram
